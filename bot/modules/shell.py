@@ -18,6 +18,9 @@ async def shell(client, message):
         await sendMessage(message, 'No command to execute was given.')
         return
       blacklisted_files = ['config.env','token.pickle']
+      for file in blacklisted_files:
+        if file in cmd[1]:
+          await sendMessage(message,f'Usage of {file} is not allowed.' )
      
     cmd = cmd[1]
     stdout, stderr, _ = await cmd_exec(cmd, shell=True)
